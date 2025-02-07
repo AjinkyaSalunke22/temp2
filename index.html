@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incoming Call</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black flex justify-center items-center h-screen">
+    <div class="relative w-80 h-[500px] bg-gray-900 rounded-3xl shadow-lg flex flex-col items-center p-6 text-white">
+        <!-- Status Bar -->
+        <div class="absolute top-4 left-6 text-sm">9:41</div>
+        <div class="absolute top-4 right-6 flex space-x-1">
+            <span>📶</span>
+            <span>🔋</span>
+        </div>
+
+        <!-- Caller Info -->
+        <div class="mt-12 text-center">
+            <p class="text-lg text-gray-400">Outgoing Call</p>
+            <h2 class="text-3xl font-bold mt-1">Unknown</h2>
+        </div>
+
+        <!-- Call Timer -->
+        <p id="callTimer" class="text-gray-400 text-sm mt-2">00:30</p>
+
+        <!-- Caller Avatar -->
+        <div class="mt-6 w-24 h-24 bg-gray-700 rounded-full flex justify-center items-center">
+            <span class="text-3xl">📞</span>
+        </div>
+
+        <!-- Call Actions -->
+        <div class="absolute bottom-6 flex space-x-10">
+            <button id="declineCall" class="w-16 h-16 bg-red-600 rounded-full flex justify-center items-center shadow-lg">
+                ❌
+            </button>
+            <button id="acceptCall" class="w-16 h-16 bg-green-600 rounded-full flex justify-center items-center shadow-lg">
+                📞
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 30;
+        const timerElement = document.getElementById("callTimer");
+        const interval = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = timeLeft < 10 ? `00:0${timeLeft}` : `00:${timeLeft}`;
+            if (timeLeft === 0) {
+                clearInterval(interval);
+                timerElement.textContent = "Call Ended";
+            }
+        }, 1000);
+
+        document.getElementById("declineCall").addEventListener("click", () => {
+            clearInterval(interval);
+            timerElement.textContent = "Call Declined";
+        });
+
+        document.getElementById("acceptCall").addEventListener("click", () => {
+            clearInterval(interval);
+            timerElement.textContent = "Call Connected";
+        });
+    </script>
+</body>
+</html>
