@@ -22,7 +22,7 @@
         </div>
 
         <!-- Call Timer -->
-        <p id="callTimer" class="text-gray-400 text-sm mt-2">00:30</p>
+        <p id="callTimer" class="text-gray-400 text-sm mt-2">00:00</p>
 
         <!-- Caller Avatar -->
         <div class="mt-6 w-24 h-24 bg-gray-700 rounded-full flex justify-center items-center">
@@ -41,10 +41,10 @@
     </div>
 
     <script>
-        let timeLeft = 30;
+        let timeLeft = 0;
         const timerElement = document.getElementById("callTimer");
         const interval = setInterval(() => {
-            timeLeft--;
+            timeLeft++;
             timerElement.textContent = timeLeft < 10 ? `00:0${timeLeft}` : `00:${timeLeft}`;
             if (timeLeft === 0) {
                 clearInterval(interval);
